@@ -4,36 +4,65 @@ import API from "../utils/API";
 import UserRow from "./row";
 
 class TableContainer extends Component {
-    // state = {
-    //   currentPage: "Home"
-    // };
-  
-    // handlePageChange = page => {
-    //   this.setState({ currentPage: page });
-     
-    // };
-  
-    // renderPage = () => {
-    //   if (this.state.currentPage === "About") {
-    //     return <About/>
-    //   }
-    //   else if (this.state.currentPage === "Blog") {
-    //     return <Blog/>
-    //   }
-    //   else if (this.state.currentPage === "Home") {
-    //     return <Home/>
-    //   }
-    //   else if (this.state.currentPage === "Contact") {
-    //     return <Contact/>
-    //   }
-    // }
+
+    state = {
+        search: "",
+        result: [],
+        name: ""
+      };
+    
+      // When the component mounts, get a list of all available base breeds and update this.state.breeds
+      componentDidMount() {
+        API.searchName()
+          .then(res => {
+              console.log(res)
+              console.log("hi")
+              this.setState({ result: res.data.results })
+              console.log("hi")
+              console.log(this.state.result)
+              
+          })
+          .catch(err => console.log(err));
+      }
+    
+      handleInputChange = event => {
+        this.setState({ search: event.target.value });
+      };
+    
+      handleFormSubmit = event => {
+        event.preventDefault();
+        API.searchName(this.state.search)
+          .then(res => {
+            if (res.data.status === "error") {
+              throw new Error(res.data);
+            }
+            this.setState({ result: res.data, error: "" });
+          })
+          .catch(err => this.setState({ error: err.message }));
+      };
   
     render() {
       return (
         <div>
           
         Hello World!
-        <UserRow/>
+        <table>
+        {this.state.result.map(item => (
+        <UserRow 
+        
+        name={item.name.first}
+        birthday={item.dob.date}
+        email={item.email}
+        />
+        ))}
+        </table>
+        <SearchForm
+            handleFormSubmit={this.handleFormSubmit}
+            handleInputChange={this.handleInputChange}
+            results={this.state.name}
+          />
+          {/* <SearchResults results={this.state.results} /> */}
+        
         </div>
       );
     }
