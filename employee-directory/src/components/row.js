@@ -5,7 +5,10 @@ function UserRow(props) {
         
     <tr>
     <td>Name: {props.name}</td>
-    <td>Birthday: {props.birthday} </td>
+    <td>
+        <img src= {props.image}/>
+    </td>
+    <td>Phone Number: {props.phone} </td>
     <td>Email: {props.email}</td>
     </tr>
         

@@ -16,9 +16,7 @@ class TableContainer extends Component {
         API.searchName()
           .then(res => {
               console.log(res)
-              console.log("hi")
               this.setState({ result: res.data.results })
-              console.log("hi")
               console.log(this.state.result)
               
           })
@@ -26,19 +24,17 @@ class TableContainer extends Component {
       }
     
       handleInputChange = event => {
-        this.setState({ search: event.target.value });
+        event.preventDefault();
+        console.log(event.target.value)
+        const result = this.state.result.filter(item => item.name.first !== event.target.value);
+            // const {name, value} = item.event.target.name
+            // return name
+        this.setState({ result })
       };
     
       handleFormSubmit = event => {
         event.preventDefault();
-        API.searchName(this.state.search)
-          .then(res => {
-            if (res.data.status === "error") {
-              throw new Error(res.data);
-            }
-            this.setState({ result: res.data, error: "" });
-          })
-          .catch(err => this.setState({ error: err.message }));
+       
       };
   
     render() {
@@ -46,22 +42,24 @@ class TableContainer extends Component {
         <div>
           
         Hello World!
-        <table>
-        {this.state.result.map(item => (
-        <UserRow 
-        
-        name={item.name.first}
-        birthday={item.dob.date}
-        email={item.email}
-        />
-        ))}
-        </table>
         <SearchForm
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}
             results={this.state.name}
           />
           {/* <SearchResults results={this.state.results} /> */}
+        <tbody>
+        {this.state.result.map(item => (
+        <UserRow 
+        key={item.id.value}
+        name={item.name.first + " " + item.name.last}
+        image={item.picture.thumbnail}
+        phone={item.phone}
+        email={item.email}
+        />
+        ))}
+        </tbody>
+        
         
         </div>
       );
