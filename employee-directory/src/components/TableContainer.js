@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SearchForm from "./SearchForm";
 import API from "../utils/API";
 import UserRow from "./row";
+import TableHead from "./TableHead";
 
 class TableContainer extends Component {
 
@@ -49,6 +50,7 @@ class TableContainer extends Component {
           />
           {/* <SearchResults results={this.state.results} /> */}
         <tbody>
+        <TableHead />
         {this.state.result.map(item => (
         <UserRow 
         key={item.id.value}

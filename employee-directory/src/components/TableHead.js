@@ -1,7 +1,9 @@
 import React from "react";
 
 
-function TableHead {
+function TableHead() {
+
+    return (
     <tr>
         <th>
             Name
@@ -17,6 +19,7 @@ function TableHead {
         </th>
 
     </tr>
+    );
 
 }
 
