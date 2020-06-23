@@ -4,12 +4,12 @@ function UserRow(props) {
     return (
         
     <tr>
-    <td>Name: {props.name}</td>
+    <td>{props.name}</td>
     <td>
-        <img src= {props.image}/>
+        <img src= {props.image} alt = "pictures of employees"/>
     </td>
-    <td>Phone Number: {props.phone} </td>
-    <td>Email: {props.email}</td>
+    <td>{props.phone} </td>
+    <td>{props.email}</td>
     </tr>
         
     );

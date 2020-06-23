@@ -49,6 +49,7 @@ class TableContainer extends Component {
             results={this.state.name}
           />
           {/* <SearchResults results={this.state.results} /> */}
+        <table>
         <tbody>
         <TableHead />
         {this.state.result.map(item => (
@@ -61,6 +62,7 @@ class TableContainer extends Component {
         />
         ))}
         </tbody>
+        </table>
         
         
         </div>
