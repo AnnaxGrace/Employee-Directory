@@ -3,6 +3,7 @@ import SearchForm from "./SearchForm";
 import API from "../utils/API";
 import UserRow from "./row";
 import TableHead from "./TableHead";
+import SortButton from "./sortButton"
 
 class TableContainer extends Component {
 
@@ -12,7 +13,7 @@ class TableContainer extends Component {
         name: ""
       };
     
-      // When the component mounts, get a list of all available base breeds and update this.state.breeds
+      
       componentDidMount() {
         API.searchName()
           .then(res => {
@@ -23,18 +24,18 @@ class TableContainer extends Component {
           })
           .catch(err => console.log(err));
       }
-    
+      
+   
+
       handleInputChange = event => {
         event.preventDefault();
         console.log(event.target.value)
-        const result = this.state.result.filter(item => item.name.first !== event.target.value);
-            // const {name, value} = item.event.target.name
-            // return name
+        const result = this.state.result.filter(item => item.name.first.includes(event.target.value));
         this.setState({ result })
       };
     
-      handleFormSubmit = event => {
-        event.preventDefault();
+      sortUsers = event => {
+        console.log("working?")
        
       };
   
@@ -44,11 +45,12 @@ class TableContainer extends Component {
           
        
         <SearchForm
-            handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}
             results={this.state.name}
-          />
-          {/* <SearchResults results={this.state.results} /> */}
+        />
+        <SortButton
+            sortUsers={this.sortUsers}
+        />
         <table>
         <tbody>
         <TableHead />
