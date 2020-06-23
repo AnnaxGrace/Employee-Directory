@@ -30,13 +30,24 @@ class TableContainer extends Component {
       handleInputChange = event => {
         event.preventDefault();
         console.log(event.target.value)
-        const result = this.state.result.filter(item => item.name.first.includes(event.target.value));
+        let result = this.state.result.filter(item => item.name.first.includes(event.target.value));
         this.setState({ result })
       };
     
       sortUsers = event => {
         console.log("working?")
-       
+        let result = this.state.result.sort(function(a, b) {
+            var nameA = a.name.first.toUpperCase();
+            var nameB = b.name.first.toUpperCase()
+            if (nameA < nameB) {
+                return -1
+            }
+            if (nameA > nameB) {
+                return 1
+            }
+            return 0;
+        })
+        this.setState({ result })
       };
   
     render() {
