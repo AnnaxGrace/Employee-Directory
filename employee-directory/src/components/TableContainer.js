@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SearchForm from "./SearchForm";
 import API from "../utils/API";
+import UserRow from "./row";
 
 class TableContainer extends Component {
     // state = {
@@ -32,7 +33,7 @@ class TableContainer extends Component {
         <div>
           
         Hello World!
-          
+        <UserRow/>
         </div>
       );
     }
