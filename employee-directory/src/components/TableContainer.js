@@ -42,7 +42,7 @@ class TableContainer extends Component {
       return (
         <div>
           
-        Hello World!
+       
         <SearchForm
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}
