@@ -1,5 +1,8 @@
 import React from "react";
 
+/// This is our html for our form that we will require in our TableContainer
+//It takes in our handleInputChange function so that we can filter through our data
+
 function SearchForm(props) {
     return (
       <form className="Name">

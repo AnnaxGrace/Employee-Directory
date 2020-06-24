@@ -13,29 +13,27 @@ class TableContainer extends Component {
         name: ""
       };
     
-      
+      //When the page loads, run our api call and store our returned data in our state.result array
       componentDidMount() {
         API.searchName()
           .then(res => {
-              console.log(res)
               this.setState({ result: res.data.results })
-              console.log(this.state.result)
               
           })
           .catch(err => console.log(err));
       }
       
    
-
+      //This function handles the search bar input, and filters the list when you search for a person
       handleInputChange = event => {
         event.preventDefault();
-        console.log(event.target.value)
         let result = this.state.result.filter(item => item.name.first.includes(event.target.value));
         this.setState({ result })
       };
     
+      //This function sorts the list by first name when you click on it
       sortUsers = event => {
-        console.log("working?")
+        
         let result = this.state.result.sort(function(a, b) {
             var nameA = a.name.first.toUpperCase();
             var nameB = b.name.first.toUpperCase()
@@ -54,16 +52,18 @@ class TableContainer extends Component {
       return (
         <div>
           
-       
+       {/* Calls our form and passes on our handleInputChange function */}
         <SearchForm
             handleInputChange={this.handleInputChange}
             results={this.state.name}
         />
+        {/* Calls our btn html and passes on our sortUsers function */}
         <SortButton
             sortUsers={this.sortUsers}
         />
         <table>
         <tbody>
+        {/* This maps through our results from our api and then grabs the information for each index in our data to the row component */}
         <TableHead />
         {this.state.result.map(item => (
         <UserRow 
